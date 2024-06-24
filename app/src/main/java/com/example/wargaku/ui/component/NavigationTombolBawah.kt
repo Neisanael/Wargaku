@@ -1,15 +1,11 @@
 package com.example.wargaku.ui.component
 
-import android.widget.RadioGroup
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
@@ -21,15 +17,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.navigation.NavController
+import androidx.navigation.compose.currentBackStackEntryAsState
+
 
 @Composable
-fun NavigationTombolBawah() {
-    var selectedButton by remember { mutableStateOf("Home") }
+fun NavigationTombolBawah(navController: NavController) {
+    val navBackStackEntry = navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry.value?.destination?.route
+
     BottomAppBar(
         containerColor = Color(0xFF0FA4AF),
         modifier = Modifier
@@ -44,20 +43,20 @@ fun NavigationTombolBawah() {
             BottomBarButton(
                 Icons.Default.Home,
                 "Home",
-                selected = selectedButton == "Home"
-            ) { selectedButton = "Home" }
+                selected = currentRoute == "Home"
+            ) { navController.navigate("Home") }
 
             BottomBarButton(
                 Icons.Default.Search,
                 "Search",
-                selected = selectedButton == "Search"
-            ) { selectedButton = "Search" }
+                selected = currentRoute == "Search"
+            ) { navController.navigate("Search") }
 
             BottomBarButton(
                 Icons.Default.Person,
                 "Profile",
-                selected = selectedButton == "Profile"
-            ) { selectedButton = "Profile" }
+                selected = currentRoute == "Profile"
+            ) { navController.navigate("Profile") }
         }
     }
 }
@@ -86,5 +85,5 @@ fun BottomBarButton(
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreviewNavigationTombolBawah() {
-    NavigationTombolBawah()
+
 }

@@ -22,7 +22,7 @@ import androidx.compose.ui.text.input.ImeAction
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FieldTextCari() {
+fun FieldTextCari(modifier: Modifier = Modifier) {
     var text by remember { mutableStateOf("") }
     OutlinedTextField(
         value = text,
@@ -45,9 +45,9 @@ fun FieldTextCari() {
             focusedLabelColor = Color(0xFF024950),  // Label color when focused
             unfocusedLabelColor = Color(0xFF024950)  // Label color when not focused
         ),
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
-            .padding(16.dp)
+            .padding(top = 26.dp, start = 16.dp, end = 16.dp, bottom = 16.dp)
     )
 }
 
